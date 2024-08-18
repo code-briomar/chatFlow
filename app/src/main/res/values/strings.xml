@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">chatFlow</string>
+    <string name="upload_screenshot_button">Upload a screenshot</string>
+    <string name="what_to_do"><u>What to do?</u></string>
+    <string name="app_description">Upload chat, get reply suggestions.</string>
+    <string name="api_response_suggestion"> </string>
+    <string name="reset">Upload Again</string>
+</resources>

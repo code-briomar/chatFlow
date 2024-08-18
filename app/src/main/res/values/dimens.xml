@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_elevation">50dp</dimen>
+    <dimen name="screenshot_padding">20dp</dimen>
+    <dimen name="button_radius">10dp</dimen>
+    <dimen name="cardview_padding">10dp</dimen>
+</resources>
