@@ -1,0 +1,31 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- First diagonal line -->
+    <item android:tint="?attr/colorOnPrimary">
+        <rotate
+                android:fromDegrees="45"
+                android:pivotX="50%"
+                android:pivotY="50%">
+            <shape android:shape="rectangle">
+                <size
+                        android:width="2dp"
+                        android:height="24dp" />
+                <solid android:color="#FFFFFF" /> <!-- Default solid color, will be tinted -->
+            </shape>
+        </rotate>
+    </item>
+
+    <!-- Second diagonal line -->
+    <item android:tint="?attr/colorButtonNormal">
+        <rotate
+                android:fromDegrees="-45"
+                android:pivotX="50%"
+                android:pivotY="50%">
+            <shape android:shape="rectangle">
+                <size
+                        android:width="2dp"
+                        android:height="24dp" />
+                <solid android:color="#FFFFFF" /> <!-- Default solid color, will be tinted -->
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

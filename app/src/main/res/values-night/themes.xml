@@ -19,6 +19,7 @@
         <item name="titleTextColor">#1F1F1F</item>
     </style>
 
+    <color name="cancelIconColor">#FFFFFF</color> <!-- White for dark mode -->
     <style name="WhatToDoContainer">
 
     </style>
