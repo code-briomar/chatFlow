@@ -84,7 +84,7 @@ public class ChatFlow extends AppCompatActivity {
                                             try {
                                                 // Parse the JSON response
                                                 JSONObject jsonResponse = new JSONObject(result);
-                                                String apiResult = jsonResponse.getString("result");
+                                                String apiResult = jsonResponse.getString("generated_text");
 
                                                 // Hide the progress bar
                                                 progressBar.setVisibility(View.INVISIBLE);

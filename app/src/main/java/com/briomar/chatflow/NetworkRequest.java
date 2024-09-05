@@ -7,12 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.*;
+import org.json.JSONObject;
 
 
 public class NetworkRequest {
@@ -38,7 +34,7 @@ public class NetworkRequest {
         @Override
         protected String doInBackground(String... params) {
             String screenshotURI = params[0];
-            String url = "https://chat-flow-api.onrender.com/post-chatflow-data";
+            String url = "https://google-gemini-proxy-for-chatflow.onrender.com/generate-text";
             File imageFile = new File(screenshotURI);
 
             Log.v("Image File",imageFile.getAbsolutePath());
@@ -56,7 +52,7 @@ public class NetworkRequest {
             RequestBody fileBody = RequestBody.create(MEDIA_TYPE_JPEG, imageFile);
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-                    .addFormDataPart("file", imageFile.getName(), fileBody)
+                    .addFormDataPart("image", imageFile.getName(), fileBody)
                     .build();
 
             Request request = new Request.Builder()
