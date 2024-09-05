@@ -38,6 +38,8 @@ public class ChatFlow extends AppCompatActivity {
     private ImageView uploadedImage;
     private Button uploadButton;
     private Button resetButton;
+
+    private Button cancelButton;
     private TextView api_response_view;
     private ProgressBar progressBar;
 
@@ -55,7 +57,7 @@ public class ChatFlow extends AppCompatActivity {
                             selectedImageBitmap = MediaStore.Images.Media.getBitmap(
                                     this.getContentResolver(), selectedImageUri
                             );
-                            showSnackbar("Processing reply...");
+//                            showSnackbar("Processing reply...");
 
                             // Get the file path from the URI
                             String imagePath = FileUtils.getRealPathFromURI(this,selectedImageUri);
@@ -73,6 +75,7 @@ public class ChatFlow extends AppCompatActivity {
                                 uploadButton.setVisibility(View.INVISIBLE);
                                 // Show the progress bar
                                 progressBar.setVisibility(View.VISIBLE);
+                                cancelButton.setVisibility(View.VISIBLE);
                                 // Set the screenshot URI
                                 NetworkRequest networkRequest = new NetworkRequest();
 
@@ -86,8 +89,11 @@ public class ChatFlow extends AppCompatActivity {
                                                 JSONObject jsonResponse = new JSONObject(result);
                                                 String apiResult = jsonResponse.getString("generated_text");
 
+                                                // Clear the response text view
+                                                api_response_view.setText("");
                                                 // Hide the progress bar
                                                 progressBar.setVisibility(View.INVISIBLE);
+                                                cancelButton.setVisibility(View.INVISIBLE);
                                                 // Set the API Response View to the parsed result
                                                 api_response_view.setText(apiResult);
                                                 // Show the reset button and result text
@@ -142,11 +148,13 @@ public class ChatFlow extends AppCompatActivity {
         uploadedImage = findViewById(R.id.uploadedImage);
         uploadButton = findViewById(R.id.uploadButton);
         resetButton = findViewById(R.id.resetButton);
+        cancelButton = findViewById(R.id.cancelButton);
         api_response_view = findViewById(R.id.api_response_view);
         progressBar = findViewById(R.id.progressBar);
         // Hide the progress bar and reset button and api_response_view
         api_response_view.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
+        cancelButton.setVisibility(View.INVISIBLE);
         resetButton.setVisibility(View.INVISIBLE);
 
         // Request permissions to access files
@@ -155,11 +163,12 @@ public class ChatFlow extends AppCompatActivity {
         }
 
         uploadButton.setOnClickListener(v -> setUploadedImage());
-        resetButton.setOnClickListener(v->resetState());
+        resetButton.setOnClickListener(v->resetStateAndInitiateUpload());
+        cancelButton.setOnClickListener(v -> resetState());
         Objects.requireNonNull(getSupportActionBar()).hide();
     }
 
-    private void resetState(){
+    private void resetStateAndInitiateUpload(){
         // Clear and hide API text
         api_response_view.setText("");
         api_response_view.setVisibility(View.INVISIBLE);
@@ -170,6 +179,21 @@ public class ChatFlow extends AppCompatActivity {
         // Initiate upload again
         setUploadedImage();
     }
+
+    private void resetState(){
+        // Clear and hide API text
+        api_response_view.setText("");
+        api_response_view.setVisibility(View.INVISIBLE);
+        // Remove image
+        uploadedImage.setImageBitmap(null);
+        // Hide Cancel Button
+        cancelButton.setVisibility(View.INVISIBLE);
+        //Hide the Progress Bar
+        progressBar.setVisibility(View.INVISIBLE);
+        //Show the upload button
+        uploadButton.setVisibility(View.VISIBLE);
+    }
+
     private void setUploadedImage() {
         Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         i.addCategory(Intent.CATEGORY_OPENABLE);

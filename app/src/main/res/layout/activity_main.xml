@@ -6,6 +6,23 @@
                                                    android:background="?android:attr/windowBackground"
 >
     <Button
+            android:backgroundTint="?attr/colorAccent"
+            android:textColor="?attr/colorOnSecondary"
+            android:layout_width="48dp"
+            android:elevation="10dp"
+            android:padding="8dp"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null"
+            android:layout_height="50dp"
+            android:id="@+id/cancelButton"
+            app:layout_constraintTop_toBottomOf="@+id/uploadedImage"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.242"
+            android:layout_marginBottom="88dp" android:fontFamily="@font/inter_semibold"
+            app:layout_constraintHorizontal_bias="0.428" app:layout_constraintStart_toEndOf="@+id/uploadButton"
+            app:icon="@android:drawable/ic_menu_close_clear_cancel" app:iconTint="@color/white"
+            android:contentDescription="@string/empty_string"/>
+    <Button
             android:text="@string/reset"
             android:backgroundTint="?attr/colorAccent"
             android:textColor="?attr/colorOnSecondary"

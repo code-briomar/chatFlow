@@ -5,4 +5,5 @@
     <string name="app_description">Upload chat, get reply suggestions.</string>
     <string name="api_response_suggestion"> </string>
     <string name="reset">Upload Again</string>
+    <string name="empty_string"> </string>
 </resources>
