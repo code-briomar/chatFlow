@@ -34,7 +34,9 @@ public class NetworkRequest {
         @Override
         protected String doInBackground(String... params) {
             String screenshotURI = params[0];
-            String url = "https://google-gemini-proxy-for-chatflow.onrender.com/generate-text";
+
+            // Should not be part of commit data.
+            String url = "https://chatflow.lomogantech.co.ke/generate-text";
             File imageFile = new File(screenshotURI);
 
             Log.v("Image File",imageFile.getAbsolutePath());
