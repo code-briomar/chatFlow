@@ -43,6 +43,8 @@ public class ChatFlow extends AppCompatActivity {
     private TextView api_response_view;
     private ProgressBar progressBar;
 
+    private NetworkMonitor networkMonitor;
+
     // Unique code
     ActivityResultLauncher<Intent> launchImageUpload = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -125,25 +127,13 @@ public class ChatFlow extends AppCompatActivity {
             }
     );
 
-    // Helper method to get the real path from URI
-    private String getRealPathFromURI(Uri uri) {
-        String result = null;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(uri, proj, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            result = cursor.getString(columnIndex);
-            cursor.close();
-        }
-        return result;
-    }
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_main);
+
+
 
         uploadedImage = findViewById(R.id.uploadedImage);
         uploadButton = findViewById(R.id.uploadButton);
@@ -161,6 +151,9 @@ public class ChatFlow extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             checkAndRequestPermissions();
         }
+
+        //Start monitoring internet status
+        networkMonitor = new NetworkMonitor(this);
 
         uploadButton.setOnClickListener(v -> setUploadedImage());
         resetButton.setOnClickListener(v->resetStateAndInitiateUpload());
@@ -229,8 +222,6 @@ public class ChatFlow extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -243,4 +234,17 @@ public class ChatFlow extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Register network callback
+        networkMonitor = new NetworkMonitor(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Unregister network callback
+        networkMonitor.unregisterCallback();
+    }
 }

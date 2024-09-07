@@ -1,6 +1,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- First diagonal line -->
-    <item android:tint="?attr/colorOnPrimary">
+    <item android:tint="?attr/colorOnTertiary">
         <rotate
                 android:fromDegrees="45"
                 android:pivotX="50%"
@@ -9,13 +9,13 @@
                 <size
                         android:width="2dp"
                         android:height="24dp" />
-                <solid android:color="#FFFFFF" /> <!-- Default solid color, will be tinted -->
+                <solid android:color="?attr/colorOnTertiary" /> <!-- Default solid color, will be tinted -->
             </shape>
         </rotate>
     </item>
 
     <!-- Second diagonal line -->
-    <item android:tint="?attr/colorButtonNormal">
+    <item android:tint="?attr/colorOnTertiary">
         <rotate
                 android:fromDegrees="-45"
                 android:pivotX="50%"
@@ -24,7 +24,7 @@
                 <size
                         android:width="2dp"
                         android:height="24dp" />
-                <solid android:color="#FFFFFF" /> <!-- Default solid color, will be tinted -->
+                <solid android:color="?attr/colorOnTertiary" /> <!-- Default solid color, will be tinted -->
             </shape>
         </rotate>
     </item>

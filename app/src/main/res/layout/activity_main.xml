@@ -21,7 +21,7 @@
             android:layout_marginBottom="88dp" android:fontFamily="@font/inter_semibold"
             app:layout_constraintHorizontal_bias="0.537" app:layout_constraintStart_toEndOf="@+id/uploadButton"
             app:icon="@drawable/cancel_icon"
-            android:contentDescription="@string/empty_string" app:iconTint="@color/black"/>
+            android:contentDescription="@string/empty_string" app:iconTint="?attr/colorOnTertiary"/>
     <Button
             android:text="@string/reset"
             android:backgroundTint="?attr/colorAccent"
@@ -49,15 +49,18 @@
             app:layout_constraintVertical_bias="0.089" android:fontFamily="@font/inter_semibold"
             android:textSize="34sp"/>
 
-    <ImageView
-            android:layout_width="266dp"
-            android:layout_height="297dp"
-            android:id="@+id/uploadedImage"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:elevation="50dp"
-            android:padding="@dimen/screenshot_padding" app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.496" app:layout_constraintVertical_bias="0.372"/>
+        <ImageView
+                android:layout_width="266dp"
+                android:layout_height="297dp"
+                android:id="@+id/uploadedImage"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:scaleType="centerCrop"
+                android:elevation="50dp"
+                android:padding="@dimen/screenshot_padding" app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintHorizontal_bias="0.496" app:layout_constraintVertical_bias="0.372"
+                android:rotationX="0" app:layout_constraintCircleRadius="@dimen/button_radius"/>
+
     <Button
             android:text="@string/upload_screenshot_button"
             android:backgroundTint="?attr/colorAccent"
@@ -115,11 +118,12 @@
     </androidx.cardview.widget.CardView>
     <TextView
             android:text="@string/api_response_suggestion"
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content" android:id="@+id/api_response_view"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/uploadedImage"
-            app:layout_constraintHorizontal_bias="0.498" app:layout_constraintBottom_toTopOf="@+id/resetButton"/>
+            app:layout_constraintHorizontal_bias="0.491" app:layout_constraintBottom_toTopOf="@+id/resetButton"
+            app:layout_constraintVertical_bias="0.294" android:textAlignment="center"/>
     <ProgressBar
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
