@@ -38,11 +38,9 @@ public class ChatFlow extends AppCompatActivity {
     private ImageView uploadedImage;
     private Button uploadButton;
     private Button resetButton;
-
     private Button cancelButton;
     private TextView api_response_view;
     private ProgressBar progressBar;
-
     private NetworkMonitor networkMonitor;
 
     // Unique code
@@ -92,7 +90,7 @@ public class ChatFlow extends AppCompatActivity {
                                                 String apiResult = jsonResponse.getString("generated_text");
 
                                                 // Clear the response text view
-                                                api_response_view.setText("");
+                                                api_response_view.setText(null); // TODO : Find out why setting empty string caused weird issues.
                                                 // Hide the progress bar
                                                 progressBar.setVisibility(View.INVISIBLE);
                                                 cancelButton.setVisibility(View.INVISIBLE);
@@ -199,7 +197,7 @@ public class ChatFlow extends AppCompatActivity {
                 .make(findViewById(R.id.textView), message, Snackbar.LENGTH_LONG)
                 .setAction("okay", v -> {
                     // Nothing happens Lol.
-                    Log.v("User Action", "User clicked the okay button on the snackbar");
+                    // Dev -> Log.v("User Action", "User clicked the okay button on the snackbar");
                 });
         snackbar.setBackgroundTint(Color.rgb(224, 17, 95));
         snackbar.show();

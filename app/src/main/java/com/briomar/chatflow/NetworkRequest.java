@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.*;
-import org.json.JSONObject;
 
 
 public class NetworkRequest {
@@ -18,14 +17,25 @@ public class NetworkRequest {
 
     private static final String TAG = "NetworkRequest";
 
+
     public void simulateRequest(String screenshotURI, UploadCallback callback) {
         new UploadTask(callback).execute(screenshotURI);
     }
 
-    private static class UploadTask extends AsyncTask<String, Void, String> {
+    private static class UploadTask extends AsyncTask<String, Integer, String> {
 
         private static final MediaType MEDIA_TYPE_JPEG = MediaType.parse("image/jpeg");
         private UploadCallback callback;
+        private int progressPercent = 0;
+
+        public int getProgressPercent() {
+            return progressPercent;
+        }
+
+        public void setProgressPercent(int progressPercent) {
+            this.progressPercent = progressPercent;
+        }
+
 
         public UploadTask(UploadCallback callback) {
             this.callback = callback;
@@ -36,10 +46,11 @@ public class NetworkRequest {
             String screenshotURI = params[0];
 
             // Should not be part of commit data.
-            String url = "https://chatflow.lomogantech.co.ke/generate-text";
+            String url = "https://chatflow.lomogan.africa/generate-text";
             File imageFile = new File(screenshotURI);
 
-            Log.v("Image File",imageFile.getAbsolutePath());
+            // DEV : Log.v("Image File",imageFile.getAbsolutePath());
+
             if (!imageFile.exists()) {
                 Log.e(TAG, "Image file not found");
                 return null;
@@ -73,6 +84,13 @@ public class NetworkRequest {
                 Log.e(TAG, "Error: ", e);
                 return null;
             }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress){
+            setProgressPercent(progress[0]);
+            // TODO: Implement progress bar using `progressPercent`
+            Log.v("Uploading Image Progress % : ", String.valueOf(getProgressPercent()));
         }
 
         @Override
